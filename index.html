@@ -19,7 +19,7 @@
 				</span>
 				<span class="brand-copy"><strong>হিসাববাণী</strong><small>দোকানের ডিজিটাল খাতা</small></span>
 			</a>
-
+            
 			<div class="sidebar-label">দোকান পরিচালনা</div>
 			<nav class="primary-nav">
 				<button class="nav-item is-active" type="button" data-view="overview">
@@ -75,7 +75,7 @@
 							<p class="heading-note">আপনার দোকানের লেনদেন এক নজরে</p>
 						</div>
 						<div class="heading-actions">
-							<button class="button button-outline" type="button" data-export>
+							<button class="button button-outline" type="button" data-pdf-export>
 								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8v11m0 0 4-4m-4 4-4-4M5 15.5v3.2a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-3.2"/></svg>
 								স্টেটমেন্ট
 							</button>
@@ -184,7 +184,7 @@
 				<section class="view" id="view-customers" aria-labelledby="customers-title" hidden>
 					<div class="page-heading">
 						<div><p class="eyebrow">ক্রেতার হিসাব আলাদা করে</p><h1 id="customers-title">ক্রেতা ও বাকি</h1><p class="heading-note">ক্রেতার নাম অনুযায়ী পাওনা ও আদায়</p></div>
-						<button class="button button-outline" type="button" data-export><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8v11m0 0 4-4m-4 4-4-4M5 15.5v3.2a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-3.2"/></svg>স্টেটমেন্ট</button>
+						<button class="button button-outline" type="button" data-pdf-export><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8v11m0 0 4-4m-4 4-4-4M5 15.5v3.2a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-3.2"/></svg>PDF স্টেটমেন্ট ডাউনলোড</button>
 					</div>
 					<section class="data-section full-section">
 						<div class="section-heading"><div><h2>ক্রেতার তালিকা</h2><p>ডেমো লেনদেন থেকে হিসাব করা</p></div><span class="soft-label">ফোন নম্বর সংগ্রহ করা হয়নি</span></div>
@@ -201,12 +201,20 @@
 				<section class="view" id="view-readiness" aria-labelledby="readiness-title" hidden>
 					<div class="page-heading">
 						<div><p class="eyebrow">নিজের ব্যবসার রেকর্ড</p><h1 id="readiness-title">ব্যবসার সারাংশ</h1><p class="heading-note">খাতার তথ্য থেকে তৈরি পরীক্ষামূলক সূচক</p></div>
-						<button class="button button-outline" type="button" data-export><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8v11m0 0 4-4m-4 4-4-4M5 15.5v3.2a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-3.2"/></svg>JSON ডাউনলোড</button>
+						<button class="button button-outline" type="button" data-pdf-export><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8v11m0 0 4-4m-4 4-4-4M5 15.5v3.2a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-3.2"/></svg>PDF স্টেটমেন্ট ডাউনলোড</button>
 					</div>
 					<div class="insights-layout">
 						<section class="readiness-detail">
 							<div class="readiness-detail-header"><div><span class="eyebrow">ডেমো সূচক</span><h2>খাতার ধারাবাহিকতা</h2></div><span class="demo-badge"><span></span>নমুনা স্কোর</span></div>
-							<div class="large-score"><strong>৭৪২</strong><span> / ১০০০</span></div>
+							<div class="statement-print-header" aria-hidden="true"><span class="brand-print">হিসাববাণী</span><span>ব্যবসার আর্থিক স্টেটমেন্ট · রহিম স্টোর</span><span id="print-date"></span></div>
+							<div class="score-overview">
+								<div class="large-score"><strong>৭৪২</strong><span> / ১০০০</span></div>
+								<div class="eligibility-badge" aria-label="ডেমো প্রাথমিক ঋণ-যোগ্যতার পরিমাণ">
+									<span class="eligibility-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16v10H4zM3 6h18v3H3zm5 3v10m8-10v10"/></svg>প্রাথমিক যোগ্যতা · ডেমো</span>
+									<strong>৳৫০,০০০ পর্যন্ত</strong>
+									<span>মাইক্রো-লোনের সম্ভাব্য সীমা</span>
+								</div>
+							</div>
 							<div class="score-track large-track"><span></span></div>
 							<p class="score-disclaimer">এই নম্বরটি শুধু ডেমো। এটি বাংলাদেশ ব্যাংক/CIB স্কোর নয়, ঋণ অনুমোদন নয়, এবং কোনো ব্যাংকের সিদ্ধান্ত নয়। বাস্তব স্কোরের আগে পর্যাপ্ত ও যাচাইকৃত খাতার তথ্য দরকার।</p>
 							<div class="score-factors">
@@ -214,12 +222,27 @@
 								<div><span>লেনদেনের তথ্য</span><strong>৮৪%</strong><i><b style="width:84%"></b></i></div>
 								<div><span>আদায়ের রেকর্ড</span><strong>৬৯%</strong><i><b style="width:69%"></b></i></div>
 							</div>
+							<section class="financial-health-card" aria-labelledby="financial-health-title">
+								<div class="health-card-heading"><div><span class="eyebrow">দোকানের নগদ প্রবাহ</span><h3 id="financial-health-title">আর্থিক সুস্থতার সারাংশ</h3></div><span class="health-period">গত ৩ মাস · ডেমো</span></div>
+								<div class="health-metrics">
+									<div class="health-metric"><span>আনুমানিক মাসিক টার্নওভার</span><strong>৳২,১০,০০০</strong><small>বিক্রির হিসাব থেকে অনুমান</small></div>
+									<div class="health-metric"><span>বাকি উসুল দক্ষতা</span><strong>৮৪<span>%</span></strong><small>নথিভুক্ত আদায় ÷ বাকি বিক্রি</small></div>
+									<div class="health-metric health-risk"><span>ব্যাংক পার্টনার রিস্ক লেভেল</span><strong><i class="risk-dot"></i>মাঝারি <small>(Medium)</small></strong><small>এটি ঋণদাতার সিদ্ধান্ত নয়</small></div>
+								</div>
+								<details class="health-details"><summary>এই সূচকগুলো কীভাবে দেখবেন</summary><p>টার্নওভার ও আদায়ের হার নমুনা হিসাব। বাস্তব মূল্যায়নের জন্য যথেষ্ট সময়ের যাচাইকৃত লেনদেন এবং অংশীদার প্রতিষ্ঠানের নিজস্ব যাচাই প্রয়োজন।</p></details>
+							</section>
+							<div class="loan-cta-row">
+								<div><strong>ঋণের বিষয়ে জানতে আগ্রহী?</strong><span>আপনার অনুমতি ছাড়া কোনো ব্যাংকে তথ্য পাঠানো হবে না।</span></div>
+								<button class="button button-primary loan-apply-button" id="open-loan-dialog" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16v10H4zM3 6h18v3H3zm5 3v10m8-10v10"/></svg>১-ক্লিকে ব্যাংক লোন আবেদন করুন</button>
+							</div>
 						</section>
 						<aside class="statement-aside">
 							<span class="statement-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.8h8l4 4v12.4H7a2 2 0 0 1-2-2V5.8a2 2 0 0 1 2-2Z"/><path d="M14.5 4v4h4M9 12h6m-6 4h6"/></svg></span>
-							<h2>হিসাবের রিপোর্ট</h2>
-							<p>লেনদেনের তালিকা JSON ফাইলে নামিয়ে নিজের রেকর্ডে রাখুন। ব্যাংকে পাঠানোর আগে সম্মতি ও তথ্য যাচাই প্রয়োজন।</p>
-							<button class="button button-outline" type="button" data-export>রিপোর্ট ডাউনলোড</button>
+							<h2>আর্থিক স্টেটমেন্ট</h2>
+							<p>নিজের দোকানের হিসাব PDF হিসেবে নামিয়ে রাখুন। ব্যাংকে পাঠানোর আগে তথ্য মিলিয়ে নিন এবং নির্দিষ্ট প্রাপকের সম্মতি নিন।</p>
+							<button class="button button-outline report-action" type="button" data-pdf-export><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8v11m0 0 4-4m-4 4-4-4M5 15.5v3.2a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-3.2"/></svg>PDF স্টেটমেন্ট ডাউনলোড</button>
+							<button class="button button-whatsapp report-action" id="open-share-dialog" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.6a7.8 7.8 0 0 1-11.6 6.8L4 19.5l1.2-4.1A7.8 7.8 0 1 1 20 11.6Z"/><path d="M9 9c.6 2 2 3.4 4 4l1-1 2 1c-.4 1.3-1.2 1.8-2.5 1.6-2.5-.5-5.2-3.1-5.6-5.5C7.7 8 8.3 7.4 9 7z"/></svg>WhatsApp-এ ব্যাংক রিপোর্ট শেয়ার করুন</button>
+							<p class="share-disclaimer">এই ডেমো WhatsApp-এ সারাংশের খসড়া খুলবে; PDF ফাইলটি আলাদা করে attach করতে হবে।</p>
 						</aside>
 					</div>
 				</section>
@@ -249,6 +272,28 @@
 			<div class="field-block due-date-field" id="due-date-field"><label class="field-label" for="entry-due">বাকি দেওয়ার তারিখ <span class="optional-label">ঐচ্ছিক</span></label><input class="form-control" id="entry-due" type="date"></div>
 			<div class="dialog-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span>এটি ডেমো এন্ট্রি। তথ্য শুধু এই ব্রাউজারে সংরক্ষিত হবে।</span></div>
 			<div class="dialog-actions"><button class="button button-outline" type="button" data-close-dialog>বাতিল</button><button class="button button-primary" type="submit">খাতায় যোগ করুন</button></div>
+		</form>
+	</dialog>
+
+	<dialog class="entry-dialog partner-dialog" id="loan-dialog" aria-labelledby="loan-dialog-title">
+		<form id="loan-interest-form" method="dialog">
+			<div class="dialog-heading"><div><p class="eyebrow">ব্যাংক/NBFI পার্টনার</p><h2 id="loan-dialog-title">ঋণের আগ্রহ জানান</h2></div><button class="icon-button" type="button" aria-label="বন্ধ করুন" data-close-partner-dialog="loan-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+			<div class="partner-notice"><strong>প্রাথমিক সম্ভাব্য সীমা: ৳৫০,০০০ পর্যন্ত</strong><span>এটি অনুমোদিত ঋণ-প্রস্তাব নয়। ব্যাংক/NBFI নিজস্ব যাচাই ও শর্তে সিদ্ধান্ত নেবে।</span></div>
+			<label class="field-label" for="loan-owner-name">আপনার নাম</label><input class="form-control" id="loan-owner-name" autocomplete="name" required>
+			<label class="field-label" for="loan-owner-phone">মোবাইল নম্বর</label><input class="form-control" id="loan-owner-phone" type="tel" inputmode="tel" placeholder="০১XXXXXXXXX" autocomplete="tel" required>
+			<label class="consent-check"><input id="loan-consent" type="checkbox" required><span>আমি সম্মতি দিচ্ছি যে ঋণের বিষয়ে যোগাযোগের জন্য আমার নাম, নম্বর ও দোকানের সারাংশ নির্বাচিত পার্টনারের সঙ্গে শেয়ার করা যেতে পারে।</span></label>
+			<p class="dialog-note partner-demo-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span>ডেমো: কোনো ব্যাংক API যুক্ত নেই। এই ফর্মের তথ্য পাঠানো বা সংরক্ষণ করা হবে না।</span></p>
+			<div class="dialog-actions"><button class="button button-outline" type="button" data-close-partner-dialog="loan-dialog">এখন নয়</button><button class="button button-primary" type="submit">আগ্রহ নিশ্চিত করুন</button></div>
+		</form>
+	</dialog>
+
+	<dialog class="entry-dialog partner-dialog" id="share-dialog" aria-labelledby="share-dialog-title">
+		<form id="share-report-form" method="dialog">
+			<div class="dialog-heading"><div><p class="eyebrow">নিজে প্রাপক বেছে নিন</p><h2 id="share-dialog-title">ব্যাংক রিপোর্ট শেয়ার</h2></div><button class="icon-button" type="button" aria-label="বন্ধ করুন" data-close-partner-dialog="share-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+			<label class="field-label" for="manager-phone">ব্যাংক কর্মকর্তার WhatsApp নম্বর</label><input class="form-control" id="manager-phone" type="tel" inputmode="tel" placeholder="দেশের কোডসহ, যেমন 8801XXXXXXXXX" required>
+			<label class="consent-check"><input id="share-consent" type="checkbox" required><span>আমি এই ডেমো সারাংশটি উপরের নম্বরে WhatsApp-এ খসড়া হিসেবে শেয়ার করতে সম্মতি দিচ্ছি।</span></label>
+			<p class="dialog-note partner-demo-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span>WhatsApp খোলার আগে সারাংশটি দেখে নিতে পারবেন। PDF ফাইলটি আলাদাভাবে attach করুন।</span></p>
+			<div class="dialog-actions"><button class="button button-outline" type="button" data-close-partner-dialog="share-dialog">বাতিল</button><button class="button button-primary" type="submit">WhatsApp খসড়া খুলুন</button></div>
 		</form>
 	</dialog>
 
@@ -458,24 +503,54 @@
 		document.querySelectorAll("[data-view]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
 		document.querySelectorAll("[data-view-link]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.viewLink)));
 
-		document.querySelectorAll("[data-export]").forEach((button) => button.addEventListener("click", () => {
-			const report = {
-				schemaVersion: "demo-1",
-				generatedAt: new Date().toISOString(),
-				demoOnly: true,
-				currency: "BDT",
-				transactions: transactions.slice().sort((a, b) => new Date(a.date) - new Date(b.date)),
-				customerBalances: customerBalances()
+		function printStatement() {
+			const previousView = document.querySelector(".view.is-visible")?.id || "view-readiness";
+			showView("readiness");
+			document.getElementById("print-date").textContent = new Intl.DateTimeFormat("bn-BD", {
+				day: "numeric", month: "long", year: "numeric"
+			}).format(new Date());
+			document.body.classList.add("is-printing");
+			const finishPrint = () => {
+				document.body.classList.remove("is-printing");
+				if (previousView !== "view-readiness") showView(previousView.replace("view-", ""));
 			};
-			const blob = new Blob([JSON.stringify(report, null, 2)], { type: "application/json" });
-			const url = URL.createObjectURL(blob);
-			const link = document.createElement("a");
-			link.href = url;
-			link.download = `hisabbani-demo-${todayISO}.json`;
-			link.click();
-			URL.revokeObjectURL(url);
-			toast("ডেমো স্টেটমেন্ট ডাউনলোড হয়েছে");
-		}));
+			window.addEventListener("afterprint", finishPrint, { once: true });
+			window.print();
+		}
+		document.querySelectorAll("[data-pdf-export]").forEach((button) => button.addEventListener("click", printStatement));
+
+		const loanDialog = document.getElementById("loan-dialog");
+		const shareDialog = document.getElementById("share-dialog");
+		document.getElementById("open-loan-dialog").addEventListener("click", () => loanDialog.showModal());
+		document.getElementById("open-share-dialog").addEventListener("click", () => shareDialog.showModal());
+		document.querySelectorAll("[data-close-partner-dialog]").forEach((button) => {
+			button.addEventListener("click", () => document.getElementById(button.dataset.closePartnerDialog).close());
+		});
+		document.getElementById("loan-interest-form").addEventListener("submit", (event) => {
+			event.preventDefault();
+			loanDialog.close();
+			event.currentTarget.reset();
+			toast("ডেমো: পার্টনার ব্যাংক যুক্ত নেই, তাই আবেদন পাঠানো হয়নি");
+		});
+		document.getElementById("share-report-form").addEventListener("submit", (event) => {
+			event.preventDefault();
+			const rawPhone = digitsToLatin(document.getElementById("manager-phone").value);
+			let phone = rawPhone.replace(/\D/g, "");
+			if (phone.startsWith("0")) phone = `88${phone}`;
+			if (!/^8801[3-9]\d{8}$/.test(phone)) {
+				toast("বাংলাদেশি WhatsApp নম্বরটি দেশের কোডসহ লিখুন");
+				return;
+			}
+			const message = [
+				"আসসালামু আলাইকুম, রহিম স্টোরের HisabBani AI ডেমো আর্থিক সারাংশ:",
+				"ডেমো স্কোর: ৭৪২/১০০০; সম্ভাব্য মাইক্রো-লোন সীমা: ৳৫০,০০০ পর্যন্ত (অনুমোদন নয়)",
+				"আনুমানিক মাসিক টার্নওভার: ৳২,১০,০০০; বাকি উসুল দক্ষতা: ৮৪%; ঝুঁকি স্তর: মাঝারি।",
+				"PDF স্টেটমেন্ট আলাদাভাবে সংযুক্ত করা হবে। এই ডেমো সারাংশ ঋণ-সিদ্ধান্তের জন্য নয়।"
+			].join("\n");
+			shareDialog.close();
+			event.currentTarget.reset();
+			window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+		});
 
 		document.getElementById("voice-button").addEventListener("click", () => {
 			const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
