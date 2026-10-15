@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="bn">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f4f6f2">
+	<title>হিসাববাণী | দোকানের খাতা</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="app-shell">
+		<aside class="sidebar" id="sidebar" aria-label="প্রধান নেভিগেশন">
+			<a class="brand" href="#overview" aria-label="হিসাববাণী হোম">
+				<span class="brand-mark" aria-hidden="true">
+					<svg viewBox="0 0 34 34" fill="none"><path d="M7 24.5V10.8L17 5l10 5.8v13.7L17 30 7 24.5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M12 20.5v-6m5 6V11m5 9.5v-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="m7.8 10.8 9.2 5.4 9.2-5.4" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
+				</span>
+				<span class="brand-copy"><strong>হিসাববাণী</strong><small>দোকানের ডিজিটাল খাতা</small></span>
+			</a>
+
+			<div class="sidebar-label">দোকান পরিচালনা</div>
+			<nav class="primary-nav">
+				<button class="nav-item is-active" type="button" data-view="overview">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+					<span>আজকের হিসাব</span>
+				</button>
+				<button class="nav-item" type="button" data-view="ledger">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.8h8l4 4v12.4H7a2 2 0 0 1-2-2V5.8a2 2 0 0 1 2-2Z"/><path d="M14.5 4v4h4M9 12h6m-6 4h6"/></svg>
+					<span>লেনদেনের খাতা</span>
+				</button>
+				<button class="nav-item" type="button" data-view="customers">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.8 19a5.2 5.2 0 0 1 10.4 0m2.3-7.3a3 3 0 1 0 0-6m.6 8a4.5 4.5 0 0 1 3.1 4.3"/></svg>
+					<span>ক্রেতা ও বাকি</span>
+					<span class="nav-count" id="nav-customer-count">০</span>
+				</button>
+				<button class="nav-item" type="button" data-view="readiness">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16M6.5 16V11m5 5V6m5 10V8"/><path d="m5.5 8 5.7-3.5 4.6 2.6 3.2-2.2"/></svg>
+					<span>ব্যবসার সারাংশ</span>
+				</button>
+			</nav>
+
+			<div class="sidebar-bottom">
+				<div class="help-line"><span class="help-dot"></span><span>ডেমো মোড চালু</span></div>
+				<div class="store-switcher">
+					<span class="store-avatar">র</span>
+					<span class="store-copy"><strong>রহিম স্টোর</strong><small>মালিক: রহিম ভাই</small></span>
+					<svg class="chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+				</div>
+			</div>
+		</aside>
+
+		<div class="mobile-scrim" id="mobile-scrim"></div>
+
+		<main class="main-area">
+			<header class="topbar">
+				<button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-label="মেনু খুলুন">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+				</button>
+				<div class="topbar-context"><span class="eyebrow">আপনার দোকান</span><span class="topbar-store">রহিম স্টোর</span></div>
+				<div class="topbar-right">
+					<span class="demo-badge"><span></span>ডেমো ডেটা</span>
+					<span class="top-date" id="today-label"></span>
+					<button class="avatar-button" type="button" aria-label="রহিম ভাইয়ের প্রোফাইল">র</button>
+				</div>
+			</header>
+
+			<div class="page-wrap">
+				<section class="view is-visible" id="view-overview" aria-labelledby="overview-title">
+					<div class="page-heading">
+						<div>
+							<p class="eyebrow">বৃহস্পতিবার, দোকান খোলা</p>
+							<h1 id="overview-title">আজকের হিসাব</h1>
+							<p class="heading-note">আপনার দোকানের লেনদেন এক নজরে</p>
+						</div>
+						<div class="heading-actions">
+							<button class="button button-outline" type="button" data-export>
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8v11m0 0 4-4m-4 4-4-4M5 15.5v3.2a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-3.2"/></svg>
+								স্টেটমেন্ট
+							</button>
+							<button class="button button-primary" type="button" data-open-entry>
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+								নতুন এন্ট্রি
+							</button>
+						</div>
+					</div>
+
+					<section class="metrics" aria-label="আজকের মূল হিসাব">
+						<article class="metric metric-sales">
+							<div class="metric-head"><span class="metric-label">আজকের মোট বিক্রি</span><span class="metric-symbol">৳</span></div>
+							<strong class="metric-value" id="metric-sales">৳০</strong>
+							<span class="metric-foot"><span class="tiny-up">↗</span> ক্যাশ ও বাকিতে</span>
+						</article>
+						<article class="metric">
+							<div class="metric-head"><span class="metric-label">ক্যাশ এসেছে</span><span class="metric-icon green-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h16v11H4zM4 10h16M8 14h3"/><path d="m15 14 1.5 1.5L19 13"/></svg></span></div>
+							<strong class="metric-value" id="metric-cash">৳০</strong>
+							<span class="metric-foot">নগদ বিক্রি ও আদায়</span>
+						</article>
+						<article class="metric">
+							<div class="metric-head"><span class="metric-label">আজকের বাকি বিক্রি</span><span class="metric-icon amber-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg></span></div>
+							<strong class="metric-value" id="metric-credit">৳০</strong>
+							<span class="metric-foot">ক্রেতার কাছে নতুন বাকি</span>
+						</article>
+						<article class="metric metric-due">
+							<div class="metric-head"><span class="metric-label">মোট পাওনা</span><span class="metric-icon coral-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16v13H4zM4 10h16M8 15h4"/><path d="m16 14 2 2-2 2"/></svg></span></div>
+							<strong class="metric-value" id="metric-outstanding">৳০</strong>
+							<span class="metric-foot">সব ক্রেতার কাছে</span>
+						</article>
+					</section>
+
+					<section class="voice-strip" aria-label="ভয়েস এন্ট্রি">
+						<div class="voice-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3m-3 0h6"/></svg></div>
+						<div class="voice-copy">
+							<strong>কথা বলে হিসাব লিখুন</strong>
+							<span>বাংলায় বলুন, এন্ট্রি যোগ করার আগে দেখে নিন</span>
+						</div>
+						<button class="voice-button" id="voice-button" type="button">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3m-3 0h6"/></svg>
+							<span>ভয়েস এন্ট্রি</span>
+						</button>
+						<span class="voice-hint" id="voice-status" aria-live="polite">ব্রাউজার ডেমো</span>
+					</section>
+
+					<div class="overview-grid">
+						<section class="data-section transaction-section" aria-labelledby="recent-title">
+							<div class="section-heading">
+								<div><h2 id="recent-title">সাম্প্রতিক লেনদেন</h2><p>আজকের খাতায় যোগ হওয়া হিসাব</p></div>
+								<button class="text-button" type="button" data-view-link="ledger">সব লেনদেন <span aria-hidden="true">→</span></button>
+							</div>
+							<div class="table-scroll">
+								<table class="ledger-table">
+									<thead><tr><th>লেনদেন</th><th>ধরন</th><th>সময়</th><th class="align-right">টাকা</th></tr></thead>
+									<tbody id="recent-rows"></tbody>
+								</table>
+							</div>
+							<div class="empty-state" id="recent-empty" hidden>এখনও কোনো লেনদেন যোগ হয়নি।</div>
+						</section>
+
+						<aside class="side-column">
+							<section class="due-section" aria-labelledby="due-title">
+								<div class="section-heading compact-heading">
+									<div><h2 id="due-title">বাকি আদায়</h2><p>যাদের কাছে পাওনা আছে</p></div>
+									<span class="count-pill" id="due-count">০</span>
+								</div>
+								<div class="due-list" id="due-list"></div>
+								<button class="due-link" type="button" data-view-link="customers">ক্রেতার খাতা দেখুন <span aria-hidden="true">→</span></button>
+							</section>
+							<section class="readiness-teaser" aria-label="খাতার প্রস্তুতি">
+								<div class="readiness-top"><span>খাতার ধারাবাহিকতা</span><span class="demo-mini">নমুনা</span></div>
+								<div class="readiness-score"><strong>৭৪২</strong><span>/ ১০০০</span><span class="readiness-trend">+২৮</span></div>
+								<div class="score-track"><span></span></div>
+								<p>এটি পরীক্ষামূলক হিসাব; ঋণ অনুমোদন বা ব্যাংকের ক্রেডিট স্কোর নয়।</p>
+								<button class="text-button" type="button" data-view-link="readiness">বিস্তারিত দেখুন <span aria-hidden="true">→</span></button>
+							</section>
+						</aside>
+					</div>
+				</section>
+
+				<section class="view" id="view-ledger" aria-labelledby="ledger-title" hidden>
+					<div class="page-heading">
+						<div><p class="eyebrow">সব হিসাব, এক জায়গায়</p><h1 id="ledger-title">লেনদেনের খাতা</h1><p class="heading-note">এন্ট্রি খুঁজুন, ধরন অনুযায়ী দেখুন</p></div>
+						<button class="button button-primary" type="button" data-open-entry><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>নতুন এন্ট্রি</button>
+					</div>
+					<section class="data-section full-section">
+						<div class="ledger-controls">
+							<label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.5 15.5 4.2 4.2"/></svg><input id="ledger-search" type="search" placeholder="নাম বা বিবরণ দিয়ে খুঁজুন" autocomplete="off"></label>
+							<div class="filter-group" role="group" aria-label="লেনদেন ফিল্টার">
+								<button class="filter-button is-selected" type="button" data-filter="all">সব</button>
+								<button class="filter-button" type="button" data-filter="credit">বাকি</button>
+								<button class="filter-button" type="button" data-filter="cash">ক্যাশ</button>
+							</div>
+						</div>
+						<div class="table-scroll">
+							<table class="ledger-table ledger-table-wide">
+								<thead><tr><th>লেনদেন</th><th>ধরন</th><th>তারিখ ও সময়</th><th>বাকি তারিখ</th><th class="align-right">টাকা</th></tr></thead>
+								<tbody id="ledger-rows"></tbody>
+							</table>
+						</div>
+						<div class="empty-state" id="ledger-empty" hidden>এই ফিল্টারে কোনো লেনদেন পাওয়া যায়নি।</div>
+					</section>
+				</section>
+
+				<section class="view" id="view-customers" aria-labelledby="customers-title" hidden>
+					<div class="page-heading">
+						<div><p class="eyebrow">ক্রেতার হিসাব আলাদা করে</p><h1 id="customers-title">ক্রেতা ও বাকি</h1><p class="heading-note">ক্রেতার নাম অনুযায়ী পাওনা ও আদায়</p></div>
+						<button class="button button-outline" type="button" data-export><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8v11m0 0 4-4m-4 4-4-4M5 15.5v3.2a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-3.2"/></svg>স্টেটমেন্ট</button>
+					</div>
+					<section class="data-section full-section">
+						<div class="section-heading"><div><h2>ক্রেতার তালিকা</h2><p>ডেমো লেনদেন থেকে হিসাব করা</p></div><span class="soft-label">ফোন নম্বর সংগ্রহ করা হয়নি</span></div>
+						<div class="table-scroll">
+							<table class="ledger-table customer-table">
+								<thead><tr><th>ক্রেতা</th><th>শেষ লেনদেন</th><th class="align-right">মোট বাকি</th><th>অবস্থা</th></tr></thead>
+								<tbody id="customer-rows"></tbody>
+							</table>
+						</div>
+						<div class="empty-state" id="customers-empty" hidden>এখনও কোনো ক্রেতার বাকি নেই।</div>
+					</section>
+				</section>
+
+				<section class="view" id="view-readiness" aria-labelledby="readiness-title" hidden>
+					<div class="page-heading">
+						<div><p class="eyebrow">নিজের ব্যবসার রেকর্ড</p><h1 id="readiness-title">ব্যবসার সারাংশ</h1><p class="heading-note">খাতার তথ্য থেকে তৈরি পরীক্ষামূলক সূচক</p></div>
+						<button class="button button-outline" type="button" data-export><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8v11m0 0 4-4m-4 4-4-4M5 15.5v3.2a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-3.2"/></svg>JSON ডাউনলোড</button>
+					</div>
+					<div class="insights-layout">
+						<section class="readiness-detail">
+							<div class="readiness-detail-header"><div><span class="eyebrow">ডেমো সূচক</span><h2>খাতার ধারাবাহিকতা</h2></div><span class="demo-badge"><span></span>নমুনা স্কোর</span></div>
+							<div class="large-score"><strong>৭৪২</strong><span> / ১০০০</span></div>
+							<div class="score-track large-track"><span></span></div>
+							<p class="score-disclaimer">এই নম্বরটি শুধু ডেমো। এটি বাংলাদেশ ব্যাংক/CIB স্কোর নয়, ঋণ অনুমোদন নয়, এবং কোনো ব্যাংকের সিদ্ধান্ত নয়। বাস্তব স্কোরের আগে পর্যাপ্ত ও যাচাইকৃত খাতার তথ্য দরকার।</p>
+							<div class="score-factors">
+								<div><span>বিক্রির নিয়মিততা</span><strong>৭৮%</strong><i><b style="width:78%"></b></i></div>
+								<div><span>লেনদেনের তথ্য</span><strong>৮৪%</strong><i><b style="width:84%"></b></i></div>
+								<div><span>আদায়ের রেকর্ড</span><strong>৬৯%</strong><i><b style="width:69%"></b></i></div>
+							</div>
+						</section>
+						<aside class="statement-aside">
+							<span class="statement-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.8h8l4 4v12.4H7a2 2 0 0 1-2-2V5.8a2 2 0 0 1 2-2Z"/><path d="M14.5 4v4h4M9 12h6m-6 4h6"/></svg></span>
+							<h2>হিসাবের রিপোর্ট</h2>
+							<p>লেনদেনের তালিকা JSON ফাইলে নামিয়ে নিজের রেকর্ডে রাখুন। ব্যাংকে পাঠানোর আগে সম্মতি ও তথ্য যাচাই প্রয়োজন।</p>
+							<button class="button button-outline" type="button" data-export>রিপোর্ট ডাউনলোড</button>
+						</aside>
+					</div>
+				</section>
+
+				<footer class="page-footer"><span>হিসাববাণী · দোকানের ডিজিটাল খাতা</span><span>ডেমো সংস্করণ · তথ্য এই ব্রাউজারেই থাকে</span></footer>
+			</div>
+		</main>
+	</div>
+
+	<dialog class="entry-dialog" id="entry-dialog" aria-labelledby="entry-title">
+		<form id="entry-form" method="dialog">
+			<div class="dialog-heading"><div><p class="eyebrow">খাতায় নতুন লেনদেন</p><h2 id="entry-title">নতুন এন্ট্রি</h2></div><button class="icon-button close-dialog" type="button" aria-label="বন্ধ করুন" data-close-dialog><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+			<label class="field-label" for="entry-type">লেনদেনের ধরন</label>
+			<select class="form-control" id="entry-type" required>
+				<option value="cash_sale">ক্যাশ বিক্রি</option>
+				<option value="credit_due">বাকি বিক্রি</option>
+				<option value="customer_payment">বাকি আদায়</option>
+				<option value="expense">দোকানের খরচ</option>
+				<option value="supplier_payment">পাওনাদারকে পরিশোধ</option>
+			</select>
+			<div class="form-row">
+				<div class="field-block" id="customer-field"><label class="field-label" for="entry-name">ক্রেতা / পাওনাদারের নাম</label><input class="form-control" id="entry-name" type="text" placeholder="যেমন: রহিম ভাই" autocomplete="off"></div>
+				<div class="field-block amount-block"><label class="field-label" for="entry-amount">টাকার পরিমাণ</label><div class="amount-input"><span>৳</span><input class="form-control" id="entry-amount" type="text" inputmode="decimal" placeholder="০" required></div></div>
+			</div>
+			<label class="field-label" for="entry-description">বিবরণ <span class="optional-label">ঐচ্ছিক</span></label>
+			<input class="form-control" id="entry-description" type="text" placeholder="পণ্য বা ভয়েস ট্রান্সক্রিপ্ট">
+			<div class="field-block due-date-field" id="due-date-field"><label class="field-label" for="entry-due">বাকি দেওয়ার তারিখ <span class="optional-label">ঐচ্ছিক</span></label><input class="form-control" id="entry-due" type="date"></div>
+			<div class="dialog-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span>এটি ডেমো এন্ট্রি। তথ্য শুধু এই ব্রাউজারে সংরক্ষিত হবে।</span></div>
+			<div class="dialog-actions"><button class="button button-outline" type="button" data-close-dialog>বাতিল</button><button class="button button-primary" type="submit">খাতায় যোগ করুন</button></div>
+		</form>
+	</dialog>
+
+	<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+	<script>
+		const STORE_KEY = "hisabbani-demo-ledger-v1";
+		const today = new Date();
+		const isoDate = (date) => {
+			const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+			return local.toISOString().slice(0, 10);
+		};
+		const todayISO = isoDate(today);
+		const yesterday = new Date(today);
+		yesterday.setDate(yesterday.getDate() - 1);
+		const sampleRows = [
+			{ id: "d1", date: todayISO + "T10:24:00", type: "cash_sale", name: "", amount: 1250, details: "চাল, ডাল ও তেল", dueDate: "" },
+			{ id: "d2", date: todayISO + "T09:52:00", type: "credit_due", name: "রহিম মিয়া", amount: 500, details: "মিনিকেট চাল ৫ কেজি", dueDate: todayISO },
+			{ id: "d3", date: todayISO + "T09:18:00", type: "customer_payment", name: "সালমা বেগম", amount: 1000, details: "আগের বাকি আদায়", dueDate: "" },
+			{ id: "d4", date: todayISO + "T08:40:00", type: "expense", name: "", amount: 350, details: "দোকান ভাড়া ও নাস্তা", dueDate: "" },
+			{ id: "d5", date: yesterday.toISOString().slice(0, 10) + "T19:35:00", type: "credit_due", name: "করিম উদ্দিন", amount: 1200, details: "সয়াবিন তেল ও চিনি", dueDate: todayISO },
+			{ id: "d6", date: yesterday.toISOString().slice(0, 10) + "T18:20:00", type: "cash_sale", name: "", amount: 2400, details: "দিনের ক্যাশ বিক্রি", dueDate: "" },
+			{ id: "d7", date: yesterday.toISOString().slice(0, 10) + "T17:05:00", type: "credit_due", name: "সালমা বেগম", amount: 800, details: "আটা, ডিম ও দুধ", dueDate: todayISO }
+		];
+		let transactions;
+		try {
+			const saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+			transactions = Array.isArray(saved) ? saved : sampleRows;
+		} catch { transactions = sampleRows; }
+
+		const labels = {
+			cash_sale: "ক্যাশ বিক্রি",
+			credit_due: "বাকি বিক্রি",
+			customer_payment: "বাকি আদায়",
+			expense: "খরচ",
+			supplier_payment: "পাওনা পরিশোধ"
+		};
+		const amount = (value) => "৳" + new Intl.NumberFormat("bn-BD", { maximumFractionDigits: 0 }).format(value);
+		const digitsToLatin = (value) => value.replace(/[০-৯]/g, (digit) => "০১২৩৪৫৬৭৮৯".indexOf(digit));
+		const dateTime = (value) => new Intl.DateTimeFormat("bn-BD", { hour: "numeric", minute: "2-digit" }).format(new Date(value));
+		const dateLabel = (value) => new Intl.DateTimeFormat("bn-BD", { day: "numeric", month: "short" }).format(new Date(value));
+		const persist = () => localStorage.setItem(STORE_KEY, JSON.stringify(transactions));
+		const initials = (name) => name ? [...name.trim()][0] : "৳";
+
+		document.getElementById("today-label").textContent = new Intl.DateTimeFormat("bn-BD", { weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(today);
+
+		function signedAmount(row) {
+			const isOutgoing = row.type === "expense" || row.type === "supplier_payment";
+			return (isOutgoing ? "−" : "+") + amount(row.amount);
+		}
+
+		function rowMarkup(row, wide = false) {
+			const isOutgoing = row.type === "expense" || row.type === "supplier_payment";
+			const person = row.name || (row.type === "expense" ? "দোকানের খরচ" : "ক্যাশ লেনদেন");
+			const due = row.dueDate ? dateLabel(row.dueDate + "T12:00:00") : "—";
+			return `<tr>
+				<td><div class="transaction-person"><span class="person-mark ${isOutgoing ? "person-outgoing" : ""}">${initials(person)}</span><span><strong>${escapeHtml(person)}</strong><small>${escapeHtml(row.details || labels[row.type])}</small></span></div></td>
+				<td><span class="type-pill type-${row.type}">${labels[row.type] || "লেনদেন"}</span></td>
+				<td>${wide ? `<span class="date-cell">${dateLabel(row.date)} · ${dateTime(row.date)}</span>` : dateTime(row.date)}</td>
+				${wide ? `<td>${due}</td>` : ""}
+				<td class="align-right"><strong class="amount-cell ${isOutgoing ? "amount-negative" : ""}">${signedAmount(row)}</strong></td>
+			</tr>`;
+		}
+
+		function escapeHtml(value) {
+			return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
+		}
+
+		function renderRecent() {
+			const rows = transactions.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+			document.getElementById("recent-rows").innerHTML = rows.map((row) => rowMarkup(row)).join("");
+			document.getElementById("recent-empty").hidden = rows.length > 0;
+		}
+
+		let activeFilter = "all";
+		function renderLedger() {
+			const query = document.getElementById("ledger-search").value.trim().toLowerCase();
+			const filtered = transactions.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).filter((row) => {
+				const matchesFilter = activeFilter === "all"
+					|| (activeFilter === "credit" && ["credit_due", "customer_payment"].includes(row.type))
+					|| (activeFilter === "cash" && ["cash_sale", "expense", "supplier_payment"].includes(row.type));
+				const matchesQuery = !query || `${row.name} ${row.details} ${labels[row.type]}`.toLowerCase().includes(query);
+				return matchesFilter && matchesQuery;
+			});
+			document.getElementById("ledger-rows").innerHTML = filtered.map((row) => rowMarkup(row, true)).join("");
+			document.getElementById("ledger-empty").hidden = filtered.length > 0;
+		}
+
+		function customerBalances() {
+			const people = new Map();
+			for (const row of transactions) {
+				if (!row.name || !["credit_due", "customer_payment"].includes(row.type)) continue;
+				const current = people.get(row.name) || { name: row.name, balance: 0, lastDate: row.date };
+				current.balance += row.type === "credit_due" ? row.amount : -row.amount;
+				if (new Date(row.date) > new Date(current.lastDate)) current.lastDate = row.date;
+				people.set(row.name, current);
+			}
+			return [...people.values()].filter((person) => person.balance > 0).sort((a, b) => b.balance - a.balance);
+		}
+
+		function renderCustomers() {
+			const people = customerBalances();
+			document.getElementById("nav-customer-count").textContent = new Intl.NumberFormat("bn-BD").format(people.length);
+			document.getElementById("due-count").textContent = new Intl.NumberFormat("bn-BD").format(people.length);
+			document.getElementById("due-list").innerHTML = people.slice(0, 4).map((person) => `
+				<div class="due-person"><span class="person-mark">${initials(person.name)}</span><span class="due-person-copy"><strong>${escapeHtml(person.name)}</strong><small>শেষ লেনদেন ${dateLabel(person.lastDate)}</small></span><strong class="due-amount">${amount(person.balance)}</strong></div>`).join("");
+			document.getElementById("customer-rows").innerHTML = people.map((person) => `
+				<tr><td><div class="transaction-person"><span class="person-mark">${initials(person.name)}</span><span><strong>${escapeHtml(person.name)}</strong><small>ক্রেতা</small></span></div></td><td>${dateLabel(person.lastDate)}</td><td class="align-right"><strong class="amount-cell amount-due">${amount(person.balance)}</strong></td><td><span class="status-pill">বাকি আছে</span></td></tr>`).join("");
+			document.getElementById("customers-empty").hidden = people.length > 0;
+		}
+
+		function updateMetrics() {
+			const todays = transactions.filter((row) => row.date.slice(0, 10) === todayISO);
+			const sales = todays.filter((row) => ["cash_sale", "credit_due"].includes(row.type)).reduce((sum, row) => sum + row.amount, 0);
+			const cash = todays.filter((row) => ["cash_sale", "customer_payment"].includes(row.type)).reduce((sum, row) => sum + row.amount, 0);
+			const credit = todays.filter((row) => row.type === "credit_due").reduce((sum, row) => sum + row.amount, 0);
+			const outstanding = customerBalances().reduce((sum, person) => sum + person.balance, 0);
+			document.getElementById("metric-sales").textContent = amount(sales);
+			document.getElementById("metric-cash").textContent = amount(cash);
+			document.getElementById("metric-credit").textContent = amount(credit);
+			document.getElementById("metric-outstanding").textContent = amount(outstanding);
+		}
+
+		function renderAll() {
+			persist();
+			renderRecent();
+			renderLedger();
+			renderCustomers();
+			updateMetrics();
+		}
+
+		function toast(message) {
+			const node = document.getElementById("toast");
+			node.textContent = message;
+			node.classList.add("is-visible");
+			clearTimeout(toast.timer);
+			toast.timer = setTimeout(() => node.classList.remove("is-visible"), 2600);
+		}
+
+		const dialog = document.getElementById("entry-dialog");
+		const entryType = document.getElementById("entry-type");
+		function syncEntryFields() {
+			const needsCustomer = ["credit_due", "customer_payment", "supplier_payment"].includes(entryType.value);
+			document.getElementById("customer-field").hidden = !needsCustomer;
+			document.getElementById("due-date-field").hidden = entryType.value !== "credit_due";
+			document.getElementById("entry-name").required = needsCustomer;
+		}
+		function openEntry(prefill = {}) {
+			document.getElementById("entry-form").reset();
+			if (prefill.type) entryType.value = prefill.type;
+			document.getElementById("entry-name").value = prefill.name || "";
+			document.getElementById("entry-amount").value = prefill.amount || "";
+			document.getElementById("entry-description").value = prefill.details || "";
+			syncEntryFields();
+			dialog.showModal();
+			if (prefill.amount) document.getElementById("entry-name").focus();
+		}
+
+		document.querySelectorAll("[data-open-entry]").forEach((button) => button.addEventListener("click", () => openEntry()));
+		document.querySelectorAll("[data-close-dialog]").forEach((button) => button.addEventListener("click", () => dialog.close()));
+		entryType.addEventListener("change", syncEntryFields);
+		document.getElementById("entry-form").addEventListener("submit", (event) => {
+			event.preventDefault();
+			const amountValue = Number(digitsToLatin(document.getElementById("entry-amount").value).replace(/,/g, ""));
+			if (!Number.isFinite(amountValue) || amountValue <= 0) {
+				toast("সঠিক টাকার পরিমাণ লিখুন");
+				return;
+			}
+			const type = entryType.value;
+			const name = document.getElementById("entry-name").value.trim();
+			if (["credit_due", "customer_payment", "supplier_payment"].includes(type) && !name) {
+				toast("নামটি লিখুন");
+				return;
+			}
+			transactions.push({
+				id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+				date: new Date().toISOString(),
+				type,
+				name,
+				amount: amountValue,
+				details: document.getElementById("entry-description").value.trim(),
+				dueDate: type === "credit_due" ? document.getElementById("entry-due").value : ""
+			});
+			dialog.close();
+			renderAll();
+			toast("ডেমো খাতায় এন্ট্রি যোগ হয়েছে");
+		});
+
+		document.getElementById("ledger-search").addEventListener("input", renderLedger);
+		document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => {
+			activeFilter = button.dataset.filter;
+			document.querySelectorAll("[data-filter]").forEach((item) => item.classList.toggle("is-selected", item === button));
+			renderLedger();
+		}));
+
+		function showView(name) {
+			document.querySelectorAll(".view").forEach((view) => {
+				const active = view.id === `view-${name}`;
+				view.classList.toggle("is-visible", active);
+				view.hidden = !active;
+			});
+			document.querySelectorAll("[data-view]").forEach((button) => button.classList.toggle("is-active", button.dataset.view === name));
+			document.getElementById("sidebar").classList.remove("is-open");
+			document.getElementById("mobile-scrim").classList.remove("is-visible");
+			window.scrollTo({ top: 0, behavior: "smooth" });
+		}
+		document.querySelectorAll("[data-view]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
+		document.querySelectorAll("[data-view-link]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.viewLink)));
+
+		document.querySelectorAll("[data-export]").forEach((button) => button.addEventListener("click", () => {
+			const report = {
+				schemaVersion: "demo-1",
+				generatedAt: new Date().toISOString(),
+				demoOnly: true,
+				currency: "BDT",
+				transactions: transactions.slice().sort((a, b) => new Date(a.date) - new Date(b.date)),
+				customerBalances: customerBalances()
+			};
+			const blob = new Blob([JSON.stringify(report, null, 2)], { type: "application/json" });
+			const url = URL.createObjectURL(blob);
+			const link = document.createElement("a");
+			link.href = url;
+			link.download = `hisabbani-demo-${todayISO}.json`;
+			link.click();
+			URL.revokeObjectURL(url);
+			toast("ডেমো স্টেটমেন্ট ডাউনলোড হয়েছে");
+		}));
+
+		document.getElementById("voice-button").addEventListener("click", () => {
+			const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+			if (!Recognition) {
+				toast("এই ব্রাউজারে ভয়েস ইনপুট নেই; নতুন এন্ট্রি লিখুন");
+				openEntry();
+				return;
+			}
+			const button = document.getElementById("voice-button");
+			const status = document.getElementById("voice-status");
+			const recognition = new Recognition();
+			recognition.lang = "bn-BD";
+			recognition.interimResults = false;
+			recognition.maxAlternatives = 1;
+			button.classList.add("is-listening");
+			status.textContent = "শুনছি...";
+			recognition.onresult = (event) => {
+				const transcript = event.results[0][0].transcript.trim();
+				const latin = digitsToLatin(transcript);
+				const parsedAmount = latin.match(/\d[\d,]*(?:\.\d+)?/);
+				let type = "cash_sale";
+				if (/বাকি\s*(দিল|শোধ|জমা)/.test(transcript)) type = "customer_payment";
+				else if (/বাকি/.test(transcript)) type = "credit_due";
+				else if (/খরচ|ব্যয়/.test(transcript)) type = "expense";
+				openEntry({ type, amount: parsedAmount ? parsedAmount[0].replace(/,/g, "") : "", details: transcript });
+				status.textContent = "ট্রান্সক্রিপ্ট দেখে নিশ্চিত করুন";
+			};
+			recognition.onerror = () => { status.textContent = "আবার চেষ্টা করুন"; toast("ভয়েস বোঝা যায়নি, আবার বলুন"); };
+			recognition.onend = () => button.classList.remove("is-listening");
+			recognition.start();
+		});
+
+		const menuToggle = document.getElementById("menu-toggle");
+		menuToggle.addEventListener("click", () => {
+			document.getElementById("sidebar").classList.toggle("is-open");
+			document.getElementById("mobile-scrim").classList.toggle("is-visible");
+		});
+		document.getElementById("mobile-scrim").addEventListener("click", () => {
+			document.getElementById("sidebar").classList.remove("is-open");
+			document.getElementById("mobile-scrim").classList.remove("is-visible");
+		});
+
+		syncEntryFields();
+		renderAll();
+	</script>
+</body>
+</html>
