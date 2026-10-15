@@ -1,0 +1,171 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TransactionType {
+  CREDIT_DUE
+  DEBT
+  CASH_SALE
+  EXPENSE
+  CUSTOMER_PAYMENT
+  SUPPLIER_PAYMENT
+  UNKNOWN
+}
+
+enum InboundStatus {
+  RECEIVED
+  PROCESSING
+  NEEDS_CONFIRMATION
+  PROCESSED
+  FAILED
+  IGNORED
+}
+
+enum PendingStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
+  EXPIRED
+}
+
+enum EntryMethod {
+  AI_AUTO
+  OWNER_CONFIRMED
+}
+
+model StoreOwner {
+  id          String   @id @default(cuid())
+  name        String
+  phoneNumber String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  shops       Shop[]
+}
+
+model Shop {
+  id                    String                @id @default(cuid())
+  name                  String
+  whatsappPhoneNumberId String
+  ownerId               String                @unique
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  owner                 StoreOwner            @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  customers             Customer[]
+  transactions          LedgerTransaction[]
+  inboundMessages       InboundMessage[]
+  pendingTransactions   PendingTransaction[]
+  reminderLogs          ReminderLog[]
+  scoreSnapshots        CreditScoreSnapshot[]
+
+  @@index([whatsappPhoneNumberId])
+}
+
+model Customer {
+  id             String              @id @default(cuid())
+  shopId         String
+  name           String
+  phoneNumber    String?
+  remindersOptIn Boolean             @default(false)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  shop           Shop                @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  transactions   LedgerTransaction[]
+  reminderLogs   ReminderLog[]
+
+  @@unique([shopId, phoneNumber])
+  @@index([shopId, name])
+}
+
+model InboundMessage {
+  id            String              @id @default(cuid())
+  wamid         String              @unique
+  shopId        String
+  senderPhone   String
+  messageType   String
+  status        InboundStatus       @default(RECEIVED)
+  transcript    String?
+  errorMessage  String?
+  receivedAt    DateTime            @default(now())
+  processedAt   DateTime?
+  shop          Shop                @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  transaction   LedgerTransaction?
+  pending       PendingTransaction?
+
+  @@index([shopId, receivedAt])
+  @@index([status, receivedAt])
+}
+
+model PendingTransaction {
+  id               String          @id @default(cuid())
+  shopId           String
+  inboundWamid     String          @unique
+  senderPhone      String
+  transactionType  TransactionType
+  amount           Decimal?        @db.Decimal(12, 2)
+  customerName     String?
+  itemDescription  String?
+  dueDate          DateTime?
+  confidence       Float
+  status           PendingStatus   @default(PENDING)
+  expiresAt        DateTime
+  createdAt        DateTime        @default(now())
+  shop             Shop            @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  inboundMessage   InboundMessage  @relation(fields: [inboundWamid], references: [wamid], onDelete: Cascade)
+
+  @@index([shopId, status, expiresAt])
+}
+
+model LedgerTransaction {
+  id               String          @id @default(cuid())
+  shopId           String
+  customerId       String?
+  sourceWamid      String          @unique
+  transactionType TransactionType
+  amount           Decimal         @db.Decimal(12, 2)
+  itemDescription  String?
+  dueDate          DateTime?
+  originalText     String
+  entryMethod      EntryMethod
+  occurredAt       DateTime        @default(now())
+  createdAt        DateTime        @default(now())
+  shop             Shop            @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  customer         Customer?       @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  sourceMessage    InboundMessage  @relation(fields: [sourceWamid], references: [wamid], onDelete: Restrict)
+
+  @@index([shopId, occurredAt])
+  @@index([shopId, transactionType, occurredAt])
+  @@index([customerId, dueDate])
+}
+
+model ReminderLog {
+  id          String   @id @default(cuid())
+  shopId      String
+  customerId  String
+  localDate   String
+  sentAt      DateTime @default(now())
+  shop        Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  customer    Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@unique([customerId, localDate])
+  @@index([shopId, sentAt])
+}
+
+model CreditScoreSnapshot {
+  id               String   @id @default(cuid())
+  shopId           String
+  score            Int?
+  confidence       Int
+  status           String
+  transactionCount Int
+  historyDays      Int
+  components       Json
+  calculatedAt     DateTime @default(now())
+  shop             Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@index([shopId, calculatedAt])
+}
