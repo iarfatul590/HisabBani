@@ -53,6 +53,14 @@ Reminders require customer `remindersOptIn=true`, a phone number, an overdue cre
 3. High-confidence validated entries post transactionally. Uncertain entries remain pending until the registered owner confirms via WhatsApp buttons.
 4. Unique WhatsApp message/source IDs prevent duplicate ledger posts on webhook retries. Successful owner acknowledgements can include generated audio; speech-generation or media-upload failure does not undo the text response or ledger entry. Corrections should be implemented as reversal entries, never silent historical edits.
 
+## Parse transcript API
+
+`POST /api/parse-transcript` accepts `{ "transcript": "..." }` and returns validated structured JSON. It requires `Authorization: Bearer <PARSER_API_KEY>` and is limited to 10 requests per minute per IP. The response uses a `transactions` array so one utterance can contain multiple events, plus a separate `payment_promises` array; promises are never treated as completed collections. The endpoint creates drafts only and does not write the ledger or send reminders.
+
+```powershell
+Invoke-RestMethod -Method Post -Uri http://localhost:3000/api/parse-transcript -Headers @{ Authorization = "Bearer $env:PARSER_API_KEY" } -ContentType "application/json" -Body '{"transcript":"রহিম ভাই ৫০০ টাকার চাল বাকি নিল আর কালকে বাকির ৩০০ টাকা ফেরত দেবে বলল।"}'
+```
+
 Types distinguish customer credit sales, shop debt, cash sales, expenses, customer collections, and supplier payments. This prevents the common ambiguity of treating every "baki" transaction as the same cashflow direction.
 
 ## 5. Pilot and release checks
